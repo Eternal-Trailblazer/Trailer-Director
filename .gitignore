@@ -1,0 +1,39 @@
+# Secrets and machine-specific configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+.streamlit/secrets.toml
+config/default_config.yaml
+config/local_config.yaml
+config/*.local.yaml
+!config/default_config.example.yaml
+
+# Python environments, caches, and test artefacts
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.hypothesis/
+.coverage
+coverage.xml
+htmlcov/
+.venv/
+venv/
+env/
+
+# Generated pipeline output and local input material
+output/
+replay_data/
+test_output*/
+test_episode/
+
+# Editor and operating-system files
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db

@@ -1,0 +1,14 @@
+[server]
+maxUploadSize = 500
+maxMessageSize = 500
+enableCORS = false
+enableXsrfProtection = false
+
+[browser]
+gatherUsageStats = false
+
+[theme]
+primaryColor = "#E8A317"
+backgroundColor = "#120D0A"
+secondaryBackgroundColor = "#1E1510"
+textColor = "#F2E8DC"

@@ -1,0 +1,41 @@
+# Copy this file to config/default_config.yaml and set GEMINI_API_KEY locally.
+# Never commit the copied file: it is excluded by .gitignore.
+
+audiences:
+  - audience_id: "family"
+    name: "Family viewers"
+    description: "General family audience seeking wholesome entertainment"
+    goal: "Communicate warmth, stakes and broad entertainment value"
+    special_care: ["Follow the strictest rating rules", "Avoid frightening or suggestive context"]
+    rating_policy_ids: ["policy_family"]
+    age_range: [0, 100]
+    territories: ["IN", "US", "GB"]
+    languages: ["en", "hi"]
+
+budget:
+  total_usd: 10.00
+  model_call_limit: 200
+  media_processing_limit: 50
+  warn_at_percent: 80
+
+providers:
+  - provider_id: "gemini"
+    model: "gemini-3.8-flash"
+    priority: 1
+    api_key_env: "GEMINI_API_KEY"
+    api_key: "" # Leave blank; set GEMINI_API_KEY in your local environment instead.
+
+trailer:
+  min_duration_seconds: 20
+  max_duration_seconds: 60
+  min_segments: 3
+  max_segments: 12
+  diversity_threshold: 0.4
+
+spoiler:
+  late_episode_threshold: 0.7
+  confidence_threshold: 0.6
+
+repair:
+  max_iterations: 3
+  escalation_on_failure: true
