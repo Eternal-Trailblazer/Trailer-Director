@@ -265,6 +265,18 @@ def render_downloads(results: dict):
                            type="primary", use_container_width=True)
 
 
+def gemini_api_key() -> str | None:
+    """Read the key from Streamlit Cloud Secrets first, then local env vars."""
+    try:
+        secret = st.secrets.get("GEMINI_API_KEY")
+        if secret:
+            return str(secret)
+    except Exception:
+        # st.secrets is unavailable when no secrets.toml/Cloud secret is configured.
+        pass
+    return os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY")
+
+
 # ━━━━━━━━━━━━━━━━━━━━━━━━━ API KEY CHECK ━━━━━━━━━━━━━━━━━━━━━━━━━
 
 @st.cache_data(ttl=600, show_spinner=False)
@@ -286,7 +298,7 @@ def check_api_key() -> dict:
                 api_key = gem.get("api_key") or os.getenv(gem.get("api_key_env", "GEMINI_API_KEY"))
     except Exception:
         pass
-    api_key = api_key or os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY")
+    api_key = gemini_api_key() or api_key
     if not api_key:
         return {"ok": False, "msg": "No API key found", "model": model}
 
@@ -326,7 +338,7 @@ with st.sidebar:
     else:
         st.markdown(
             f'<div class="gold-card api-bad">🔑 <b>Gemini API:</b> {api_status["msg"]}<br>'
-            f'<span style="font-size:0.78rem;color:var(--text-dim)">Add api_key to config/default_config.yaml</span></div>',
+            f'<span style="font-size:0.78rem;color:var(--text-dim)">Add GEMINI_API_KEY in Streamlit Secrets</span></div>',
             unsafe_allow_html=True,
         )
 
@@ -472,8 +484,16 @@ if run_button and episode_package and api_status["ok"]:
                         "confidence_threshold": confidence_threshold},
             "repair": {"max_iterations": max_repair_iterations, "escalation_on_failure": True},
         }
-        if base_cfg.get("providers"):
-            config["providers"] = base_cfg["providers"]
+        # On Streamlit Cloud default_config.yaml is intentionally absent (it is
+        # ignored to protect local credentials), so create a provider from Secrets.
+        providers = [dict(provider) for provider in base_cfg.get("providers", [])]
+        if not providers:
+            providers = [{"provider_id": "gemini", "model": api_status["model"], "priority": 1,
+                          "api_key_env": "GEMINI_API_KEY"}]
+        for provider in providers:
+            if provider.get("provider_id") == "gemini":
+                provider["api_key"] = gemini_api_key() or provider.get("api_key", "")
+        config["providers"] = providers
 
         config_path = tmpdir / "config.yaml"
         config_path.write_text(yaml.dump(config), encoding="utf-8")
