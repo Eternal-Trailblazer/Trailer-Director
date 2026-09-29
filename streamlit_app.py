@@ -281,11 +281,7 @@ def gemini_api_key() -> str | None:
 
 @st.cache_data(ttl=600, show_spinner=False)
 def check_api_key() -> dict:
-    """Validate the Gemini API key from config/env with a tiny live call."""
-    try:
-        import google.generativeai as genai
-    except ImportError:
-        return {"ok": False, "msg": "google-generativeai not installed", "model": "—"}
+    """Confirm that a Gemini key is configured without blocking the UI on a network call."""
 
     cfg_path = Path(__file__).parent / "config" / "default_config.yaml"
     api_key, model = None, "gemini-3.8-flash"
@@ -302,16 +298,7 @@ def check_api_key() -> dict:
     if not api_key:
         return {"ok": False, "msg": "No API key found", "model": model}
 
-    try:
-        import warnings
-        warnings.filterwarnings("ignore")
-        genai.configure(api_key=api_key)
-        resp = genai.GenerativeModel(model).generate_content("Reply: OK")
-        if resp.text:
-            return {"ok": True, "msg": "Connected", "model": model}
-        return {"ok": False, "msg": "Empty response", "model": model}
-    except Exception as e:
-        return {"ok": False, "msg": str(e)[:120], "model": model}
+    return {"ok": True, "msg": "Key loaded", "model": model}
 
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━ HEADER ━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -331,7 +318,7 @@ with st.sidebar:
     api_status = check_api_key()
     if api_status["ok"]:
         st.markdown(
-            f'<div class="gold-card api-ok">🔑 <b>Gemini API:</b> Connected<br>'
+            f'<div class="gold-card api-ok">🔑 <b>Gemini API:</b> {api_status["msg"]}<br>'
             f'<span style="font-size:0.78rem;color:var(--text-dim)">Model: {api_status["model"]}</span></div>',
             unsafe_allow_html=True,
         )

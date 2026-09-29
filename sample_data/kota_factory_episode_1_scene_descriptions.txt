@@ -1,0 +1,26 @@
+# Illustrative test fixture — not a transcript or verified scene map of Kota Factory.
+# Use it to test the Scene Descriptions uploader with an episode video.
+
+scene_01 [00:00:00.000 - 00:00:38.000]: A teenage student arrives in a crowded coaching town with a parent. The unfamiliar streets, hostel signs, and clusters of students establish an anxious new beginning.
+
+scene_02 [00:00:38.000 - 00:01:16.000]: At a modest hostel room, the student meets a practical roommate. They compare schedules and quietly acknowledge how competitive the entrance-exam routine feels.
+
+scene_03 [00:01:16.000 - 00:01:55.000]: A coaching-class introduction shows packed desks, a fast-speaking teacher, and students taking notes. The student struggles to keep pace while trying not to look overwhelmed.
+
+scene_04 [00:01:55.000 - 00:02:34.000]: During a short break, classmates discuss marks, rankings, and the pressure attached to every test. A more experienced student offers calm advice about taking one chapter at a time.
+
+scene_05 [00:02:34.000 - 00:03:13.000]: The student calls home and gives a reassuring version of the day, then pauses after the call. The contrast shows homesickness without revealing any later story outcome.
+
+scene_06 [00:03:13.000 - 00:03:52.000]: An evening study session becomes frustrating as a difficult problem remains unsolved. The roommate turns the moment lighter with a small joke and a shared snack.
+
+scene_07 [00:03:52.000 - 00:04:31.000]: The next morning, the student returns to class with a revised plan: sit nearer the front, ask one question, and finish a short set of problems before lunch.
+
+scene_08 [00:04:31.000 - 00:05:10.000]: A mentor-like teacher notices the student’s hesitation and explains that progress in the coaching environment is uneven. The student listens, more focused than before.
+
+scene_09 [00:05:10.000 - 00:05:49.000]: A group of classmates studies together at a tea stall. Their different ambitions and anxieties create warmth, humour, and a sense of emerging friendship.
+
+scene_10 [00:05:49.000 - 00:06:28.000]: A surprise quiz creates tension in the classroom. The student starts poorly but chooses to complete the questions instead of giving up.
+
+scene_11 [00:06:28.000 - 00:07:07.000]: After class, the student walks through the coaching district at dusk, taking in the energy of thousands of students pursuing similar goals.
+
+scene_12 [00:07:07.000 - 00:07:46.000]: Back in the hostel, the student opens a notebook and begins again. The closing feeling is determined but uncertain, suitable for a non-spoiler trailer hook.
